@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+def REPO_URL = 'https://github.com/deling'  // 项目的主页   这个是说明，可随便填
+def GROUP_ID = 'com.ldl.customdownload'//这里是groupId ,必须填写  一般填你唯一的包名
+def ARTIFACT = 'customdownload'
+def VERSION_CODE = 1
+def VERSION_NAME = '1.0.0'
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: REPO_URL)
+        pom.groupId = GROUP_ID
+        pom.artifactId = ARTIFACT
+        pom.version = VERSION_NAME
+    }
+}
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+install{
+//    repositories.mave
+
+}
+
+//添加
+//publish {
+//    userOrg = 'deling'//bintray.com你的用户名
+//    groupId = 'com.ldl.customdownload'//jcenter上的路径
+//    artifactId = 'customdownloadlib'//项目名称
+//    publishVersion = '1.0.0'//版本号
+//    desc = '首次上传,一个下载工具类'//描述，不重要
+//    website = 'https://github.com/deling'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+//}
